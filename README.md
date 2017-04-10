@@ -1,2 +1,2 @@
 # angular-getting-started
-This is for students who join my trainning course.
+This is an experiment by me to Create an Angular 2 Smart Table 

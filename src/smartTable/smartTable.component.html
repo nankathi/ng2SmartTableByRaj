@@ -1,0 +1,38 @@
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Actions</td>
+                <td *ngFor="let col of columns">
+                    <a style="cursor: pointer;text-decoration: underline" (click)="Sort(col.name,col.sortBy)">{{col.description}}
+                        <i  class="pull-right fa fa-sort" *ngIf="sortIcon"></i>
+                        <i  class="pull-right fa fa-chevron-down" *ngIf="isSortedByAsc && key === col.name"></i>
+                        <i  class="pull-right fa fa-chevron-up" *ngIf="isSortedByDesc && key === col.name"></i>
+                     </a>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of rows;let i =index">   
+                <td>
+                    <a *ngIf="viewOnly" (click)="onQuickEditClicked(row,i)" title="Quick Edit"><i class="fa fa-pencil fa-lg"></i></a>
+                    <a *ngIf="isEdit && i == selectedRow" (click)="onSaveClicked(user)" title="Save"><i class="fa  fa-save fa-lg"></i></a>
+                    <a *ngIf="isEdit && i == selectedRow " (click)="cancelClicked(user)" title="Save"><i class="fa fa-close fa-lg"></i></a>
+                </td>             
+                <td *ngFor="let col of columns;let ii = index" (click)="cellClick(row)">
+                    <span *ngIf="viewOnly">{{row[col.name]}}</span>
+                    <input *ngIf="isEdit  && i === selectedRow" type="text" id="last-name" name="last-name" required="required"
+                         [(ngModel)]="row[col.name]"   class="form-control col-md-7 col-xs-12">
+                </td>
+            </tr>
+
+             <!--<tr *ngFor="let row of rows">               
+                <td *ngFor="let col of columns" (click)="cellClick(row)">
+                    <span *ngIf="viewOnly">{{row[col.name]}}</span>
+                   <inline-edit [text]="getColumnName(i)"
+    (edit)="onColumnNameEdit($event, i)"></inline-edit>
+                </td>
+            </tr>-->
+
+
+        </tbody>
+    </table>
